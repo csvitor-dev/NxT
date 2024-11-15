@@ -1,4 +1,4 @@
-﻿namespace SalesWebMVC.Data
+﻿namespace SalesApp.Data
 {
     public class SalesWebMvcContext(DbContextOptions<SalesWebMvcContext> options) : DbContext(options)
     {
