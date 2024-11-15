@@ -3,11 +3,11 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SalesWebMVC.Data;
+using SalesApp.Data;
 
 #nullable disable
 
-namespace SalesWebMVC.Migrations
+namespace SalesApp.Migrations
 {
     [DbContext(typeof(SalesWebMvcContext))]
     partial class SalesWebMvcContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace SalesWebMVC.Migrations
                 .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("SalesWebMVC.Models.Department", b =>
+            modelBuilder.Entity("SalesApp.Models.Department", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -35,7 +35,7 @@ namespace SalesWebMVC.Migrations
                     b.ToTable("Department");
                 });
 
-            modelBuilder.Entity("SalesWebMVC.Models.SalesRecord", b =>
+            modelBuilder.Entity("SalesApp.Models.SalesRecord", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -60,7 +60,7 @@ namespace SalesWebMVC.Migrations
                     b.ToTable("SalesRecord");
                 });
 
-            modelBuilder.Entity("SalesWebMVC.Models.Seller", b =>
+            modelBuilder.Entity("SalesApp.Models.Seller", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -92,9 +92,9 @@ namespace SalesWebMVC.Migrations
                     b.ToTable("Seller");
                 });
 
-            modelBuilder.Entity("SalesWebMVC.Models.SalesRecord", b =>
+            modelBuilder.Entity("SalesApp.Models.SalesRecord", b =>
                 {
-                    b.HasOne("SalesWebMVC.Models.Seller", "Seller")
+                    b.HasOne("SalesApp.Models.Seller", "Seller")
                         .WithMany("Sales")
                         .HasForeignKey("SellerID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -103,9 +103,9 @@ namespace SalesWebMVC.Migrations
                     b.Navigation("Seller");
                 });
 
-            modelBuilder.Entity("SalesWebMVC.Models.Seller", b =>
+            modelBuilder.Entity("SalesApp.Models.Seller", b =>
                 {
-                    b.HasOne("SalesWebMVC.Models.Department", "Department")
+                    b.HasOne("SalesApp.Models.Department", "Department")
                         .WithMany("Sellers")
                         .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -114,12 +114,12 @@ namespace SalesWebMVC.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("SalesWebMVC.Models.Department", b =>
+            modelBuilder.Entity("SalesApp.Models.Department", b =>
                 {
                     b.Navigation("Sellers");
                 });
 
-            modelBuilder.Entity("SalesWebMVC.Models.Seller", b =>
+            modelBuilder.Entity("SalesApp.Models.Seller", b =>
                 {
                     b.Navigation("Sales");
                 });
