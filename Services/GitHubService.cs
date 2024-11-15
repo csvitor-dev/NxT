@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SalesWebMVC.Services
+namespace SalesApp.Services
 {
     public class GitHubService
     {

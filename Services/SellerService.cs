@@ -1,4 +1,4 @@
-﻿namespace SalesWebMVC.Services
+﻿namespace SalesApp.Services
 {
     public class SellerService(SalesWebMvcContext context)
     {

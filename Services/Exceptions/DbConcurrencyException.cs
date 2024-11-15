@@ -1,4 +1,4 @@
-﻿namespace SalesWebMVC.Services.Exceptions
+﻿namespace SalesApp.Services.Exceptions
 {
     public class DbConcurrencyException(string? message) : ApplicationException(message);
 }

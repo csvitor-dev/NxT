@@ -1,4 +1,7 @@
-﻿namespace SalesWebMVC.Services
+﻿using SalesApp.Models;
+using SalesApp.Data;
+
+namespace SalesApp.Services
 {
     public class DepartmentService(SalesWebMvcContext context)
     {

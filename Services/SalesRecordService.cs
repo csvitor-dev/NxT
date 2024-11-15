@@ -1,4 +1,7 @@
-﻿namespace SalesWebMVC.Services
+﻿using SalesApp.Data;
+using SalesApp.Models;
+
+namespace SalesApp.Services
 {
     public class SalesRecordService(SalesWebMvcContext context)
     {
