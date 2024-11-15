@@ -1,4 +1,4 @@
-﻿namespace SalesWebMVC.Controllers
+﻿namespace SalesApp.Controllers
 {
     public class GitHubController(GitHubService gitHubService) : Controller
     {
@@ -10,9 +10,9 @@
 
             try
             {
-                var gitHubUser = await _gitHubService.GetGitHubUserAsync(username!);
+                GitHubUser? gitHubUser = await _gitHubService.GetGitHubUserAsync(username!);
 
-                if (gitHubUser == null) return NotFound();
+                if (gitHubUser is null) return NotFound();
 
                 return View(gitHubUser);
             }

@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace SalesWebMVC.Controllers
+namespace SalesApp.Controllers
 {
     public class HomeController : Controller
     {

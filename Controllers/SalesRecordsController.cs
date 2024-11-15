@@ -1,4 +1,4 @@
-﻿namespace SalesWebMVC.Controllers
+﻿namespace SalesApp.Controllers
 {
     public class SalesRecordsController(SalesRecordService salesRecordService) : Controller
     {

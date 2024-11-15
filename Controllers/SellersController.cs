@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace SalesWebMVC.Controllers
+namespace SalesApp.Controllers
 {
     public class SellersController(SellerService sellerService, DepartmentService departmentService) : Controller
     {

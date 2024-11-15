@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
+using SalesApp.Models;
+using SalesApp.Services;
 
-namespace SalesWebMVC.Controllers
+namespace SalesApp.Controllers
 {
     public class DepartmentsController(DepartmentService departmentService) : Controller
     {
