@@ -6,7 +6,7 @@ builder.Services.AddDbContext<SalesWebMvcContext>(options =>
     options.UseMySQL(
         builder.Configuration.GetConnectionString("db") ??
         throw new InvalidOperationException("Connection string 'db' not found."),
-        opt => opt.MigrationsAssembly("SalesWebMVC")));
+        opt => opt.MigrationsAssembly("SalesApp")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
