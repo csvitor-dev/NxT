@@ -1,7 +1,7 @@
-﻿using SalesWebMVC.Models.Enums;
+﻿using SalesApp.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace SalesWebMVC.Models
+namespace SalesApp.Models
 {
     public class SalesRecord
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SalesWebMVC.Models
+namespace SalesApp.Models
 {
     public class Department
     {

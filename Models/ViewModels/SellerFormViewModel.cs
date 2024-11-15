@@ -1,4 +1,4 @@
-﻿namespace SalesWebMVC.Models.ViewModels
+﻿namespace SalesApp.Models.ViewModels
 {
     public class SellerFormViewModel(ICollection<Department> departments)
     {
