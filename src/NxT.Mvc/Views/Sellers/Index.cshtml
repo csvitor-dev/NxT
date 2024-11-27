@@ -1,0 +1,57 @@
+﻿@model IEnumerable<NxT.Mvc.Models.Seller>
+
+@{
+    ViewData["Title"] = "Sellers";
+    ViewData["Description"] = "Seller's list";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h4>@ViewData["Description"]</h4>
+
+<p>
+    <a class="btn btn-outline-primary rounded" asp-action="Create">Crate New</a>
+</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="table-dark">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BaseSalary)
+            </th>
+            <th class="d-flex justify-content-end">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BaseSalary)
+                </td>
+                <td class="d-flex justify-content-end">
+                    <a class="btn btn-primary rounded m-1" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                    <a class="btn btn-info rounded m-1" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                    <a class="btn btn-danger rounded m-1" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,27 @@
+﻿@model NxT.Mvc.Models.Department
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+<h3>Details seller's @Model.Name</h3>
+
+<div>
+    <h4>Seller</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a class="btn btn-primary rounded" asp-action="Edit">Edit</a>
+    <a class="btn btn-outline-primary rounded" asp-action="Index">Back to List</a>
+</div>
