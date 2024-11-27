@@ -21,11 +21,11 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Using Include="SalesApp.Data"/>
-		<Using Include="SalesApp.Models"/>
-		<Using Include="SalesApp.Models.ViewModels"/>
-		<Using Include="SalesApp.Services"/>
-		<Using Include="SalesApp.Services.Exceptions"/>
+		<Using Include="NxT.Data"/>
+		<Using Include="NxT.Models"/>
+		<Using Include="NxT.Models.ViewModels"/>
+		<Using Include="NxT.Services"/>
+		<Using Include="NxT.Services.Exceptions"/>
 		<Using Include="Microsoft.AspNetCore.Mvc"/>
 		<Using Include="Microsoft.EntityFrameworkCore"/>
 	</ItemGroup>
