@@ -1,4 +1,7 @@
-﻿namespace NxT.Mvc.Services
+﻿using NxT.Core.Models;
+using NxT.Mvc.Data;
+
+namespace NxT.Mvc.Services
 {
     public class SalesRecordService(SalesWebMvcContext context)
     {

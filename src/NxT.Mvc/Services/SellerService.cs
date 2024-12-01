@@ -1,4 +1,8 @@
-﻿namespace NxT.Mvc.Services
+﻿using NxT.Core.Models;
+using NxT.Mvc.Data;
+using NxT.Mvc.Services.Exceptions;
+
+namespace NxT.Mvc.Services
 {
     public class SellerService(SalesWebMvcContext context)
     {
