@@ -36,13 +36,13 @@ if (!app.Environment.IsDevelopment())
 }
 
 // Applying default localization and formatting (en-US)
-var enUS = new CultureInfo("en-US");
+var enUs = new CultureInfo("en-US");
 app.UseRequestLocalization(
     new RequestLocalizationOptions
     {
-        DefaultRequestCulture = new RequestCulture(enUS),
-        SupportedCultures = [enUS],
-        SupportedUICultures = [enUS]
+        DefaultRequestCulture = new RequestCulture(enUs),
+        SupportedCultures = [enUs],
+        SupportedUICultures = [enUs]
     }
 );
 

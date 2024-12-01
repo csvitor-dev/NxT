@@ -2,8 +2,8 @@
 
 @{
     ViewData["Title"] = "Grouping Search";
-    DateTime minimumDate = Convert.ToDateTime(ViewData["minimumDate"] as string);
-    DateTime maximumDate = Convert.ToDateTime(ViewData["maximumDate"] as string);
+    var minimumDate = Convert.ToDateTime(ViewData["minimumDate"] as string);
+    var maximumDate = Convert.ToDateTime(ViewData["maximumDate"] as string);
 }
 
 <h2>@ViewData["Title"]</h2>
