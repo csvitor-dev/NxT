@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NxT.Mvc.Data;
 
@@ -10,16 +11,18 @@ using NxT.Mvc.Data;
 namespace NxT.Mvc.Migrations
 {
     [DbContext(typeof(SalesWebMvcContext))]
-    partial class SalesWebMvcContextModelSnapshot : ModelSnapshot
+    [Migration("20241201162930_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("SalesApp.Models.Department", b =>
+            modelBuilder.Entity("NxT.Core.Models.Department", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -35,7 +38,7 @@ namespace NxT.Mvc.Migrations
                     b.ToTable("Department");
                 });
 
-            modelBuilder.Entity("SalesApp.Models.SalesRecord", b =>
+            modelBuilder.Entity("NxT.Core.Models.SalesRecord", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -60,7 +63,7 @@ namespace NxT.Mvc.Migrations
                     b.ToTable("SalesRecord");
                 });
 
-            modelBuilder.Entity("SalesApp.Models.Seller", b =>
+            modelBuilder.Entity("NxT.Core.Models.Seller", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -92,9 +95,9 @@ namespace NxT.Mvc.Migrations
                     b.ToTable("Seller");
                 });
 
-            modelBuilder.Entity("SalesApp.Models.SalesRecord", b =>
+            modelBuilder.Entity("NxT.Core.Models.SalesRecord", b =>
                 {
-                    b.HasOne("SalesApp.Models.Seller", "Seller")
+                    b.HasOne("NxT.Core.Models.Seller", "Seller")
                         .WithMany("Sales")
                         .HasForeignKey("SellerID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -103,9 +106,9 @@ namespace NxT.Mvc.Migrations
                     b.Navigation("Seller");
                 });
 
-            modelBuilder.Entity("SalesApp.Models.Seller", b =>
+            modelBuilder.Entity("NxT.Core.Models.Seller", b =>
                 {
-                    b.HasOne("SalesApp.Models.Department", "Department")
+                    b.HasOne("NxT.Core.Models.Department", "Department")
                         .WithMany("Sellers")
                         .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -114,12 +117,12 @@ namespace NxT.Mvc.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("SalesApp.Models.Department", b =>
+            modelBuilder.Entity("NxT.Core.Models.Department", b =>
                 {
                     b.Navigation("Sellers");
                 });
 
-            modelBuilder.Entity("SalesApp.Models.Seller", b =>
+            modelBuilder.Entity("NxT.Core.Models.Seller", b =>
                 {
                     b.Navigation("Sales");
                 });

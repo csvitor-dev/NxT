@@ -1,4 +1,5 @@
-﻿using NxT.Mvc.Models.Enums;
+﻿using NxT.Core.Models;
+using NxT.Core.Models.Enums;
 
 namespace NxT.Mvc.Data
 {
