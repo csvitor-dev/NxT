@@ -1,12 +1,14 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using NxT.Mvc.Data;
+using NxT.Mvc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SalesWebMvcContext>(options =>
     options.UseMySQL(
         builder.Configuration.GetConnectionString("db") ??
         throw new InvalidOperationException("Connection string 'db' not found."),
-        opt => opt.MigrationsAssembly("SalesApp")));
+        opt => opt.MigrationsAssembly("NxT.Mvc")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -22,9 +24,6 @@ builder.Services.AddScoped<DepartmentService>();
 
 // Add sales record service to the scope
 builder.Services.AddScoped<SalesRecordService>();
-
-// Add GitHub profile service to the scope
-builder.Services.AddScoped<GitHubService>();
 
 var app = builder.Build();
 
@@ -61,17 +60,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "custom",
-    pattern: "About/{action}/{id?}",
-    defaults: new
-    {
-        controller = "GitHub",
-        action = "Index",
-    });
-
-app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
 
 app.Run();
