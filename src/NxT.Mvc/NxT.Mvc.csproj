@@ -21,11 +21,6 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Using Include="NxT.Mvc.Data"/>
-		<Using Include="NxT.Mvc.Models"/>
-		<Using Include="NxT.Mvc.Models.ViewModels"/>
-		<Using Include="NxT.Mvc.Services"/>
-		<Using Include="NxT.Mvc.Services.Exceptions"/>
 		<Using Include="Microsoft.AspNetCore.Mvc"/>
 		<Using Include="Microsoft.EntityFrameworkCore"/>
 	</ItemGroup>
