@@ -1,5 +1,9 @@
 # SalesWebMVC Updated Project (.NET 8)
 
+> ### About
+> Projeto baseado em (Projeto: Sistema Web com ASP .NET Core MVC e Entity Framework) do professor Nélio Alves realizado no seu curso de C#, que fora
+> feito em .NET 2.1 e fiz a atualização para .NET 8.0.
+
 > Desenvolvendo um projeto [**ASP.NET MVC**](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) de uma aplicação modelo baseada no projeto [_#workshop-asp-net-core-mvc_](https://github.com/acenelio/workshop-asp-net-core-mvc) do professor [_@acenelio_](https://github.com/acenelio) a partir do curso [**"C# COMPLETO Programação Orientada a Objetos + PROJETOS"**](https://www.udemy.com/course/programacao-orientada-a-objetos-csharp/) na _Udemy_.
 > O meu propósito com este projeto é atualizar a versão desenvolvida em [**.NET 2.1**](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-core-2-1) para a versão mais recente do framework ([**.NET 8.0**](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8/overview))
 
