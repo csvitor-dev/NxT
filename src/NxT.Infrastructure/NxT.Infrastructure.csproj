@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NxT.Core\NxT.Core.csproj" />
+    <ProjectReference Include="..\Shared\NxT.Exception\NxT.Exception.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
   </ItemGroup>
 
 </Project>
