@@ -1,6 +1,6 @@
 ﻿using NxT.Core.Models;
 using NxT.Mvc.Data;
-using NxT.Mvc.Services.Exceptions;
+using NxT.Exception.Internal;
 
 namespace NxT.Mvc.Services;
 

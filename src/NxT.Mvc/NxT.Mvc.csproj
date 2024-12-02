@@ -16,18 +16,15 @@
     <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 	<ItemGroup>
-		<Using Include="Microsoft.AspNetCore.Mvc"/>
-		<Using Include="Microsoft.EntityFrameworkCore"/>
+		<Using Include="Microsoft.AspNetCore.Mvc" />
+		<Using Include="Microsoft.EntityFrameworkCore" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\NxT.Core\NxT.Core.csproj" />
 	  <ProjectReference Include="..\NxT.Infrastructure\NxT.Infrastructure.csproj" />
+	  <ProjectReference Include="..\Shared\NxT.Exception\NxT.Exception.csproj" />
 	</ItemGroup>
 
 </Project>
