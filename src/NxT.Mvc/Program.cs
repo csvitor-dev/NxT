@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using NxT.Infrastructure.Extensions;
-using NxT.Mvc.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,12 +29,6 @@ app.UseRequestLocalization(
         SupportedUICultures = [enUs]
     }
 );
-
-
-using var serviceScope = app.Services.CreateScope();
-var services = serviceScope.ServiceProvider;
-var seedingService = services.GetRequiredService<SeedingService>();
-seedingService.Seed();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
