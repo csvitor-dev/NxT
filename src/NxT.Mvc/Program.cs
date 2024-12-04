@@ -1,29 +1,14 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using NxT.Infrastructure.Extensions;
 using NxT.Mvc.Data;
-using NxT.Mvc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<SalesWebMvcContext>(options =>
-    options.UseMySQL(
-        builder.Configuration.GetConnectionString("db") ??
-        throw new InvalidOperationException("Connection string 'db' not found."),
-        opt => opt.MigrationsAssembly("NxT.Mvc")));
+
+builder.Services.AddInfrastructure(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-// Add data service for seeding
-builder.Services.AddScoped<SeedingService>();
-
-// Add seller service to the scope
-builder.Services.AddScoped<SellerService>();
-
-// Add department service to the scope
-builder.Services.AddScoped<DepartmentService>();
-
-// Add sales record service to the scope
-builder.Services.AddScoped<SalesRecordService>();
 
 var app = builder.Build();
 
