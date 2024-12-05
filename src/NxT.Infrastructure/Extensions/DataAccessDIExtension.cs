@@ -18,7 +18,7 @@ public static class DataAccessDIExtension
 
     private static void AddNxtDbContext(this IServiceCollection self, string connection)
     {
-        MySqlServerVersion version = new(new Version(0, 0, 2));
+        MySqlServerVersion version = new(new Version(0, 2, 0));
 
         self.AddDbContext<NxtContext>((options)
             => options.UseMySql(connection, version,

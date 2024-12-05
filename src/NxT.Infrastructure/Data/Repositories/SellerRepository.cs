@@ -6,7 +6,8 @@ using NxT.Exception.Internal;
 namespace NxT.Infrastructure.Data.Repositories;
 
 public class SellerRepository
-    (NxtContext _context) : IReadOnlyRepository<Seller>, IWriteOnlyRepository<Seller>, IDeleteOnlyRepository
+    (NxtContext _context, DepartmentRepository _service) : IReadOnlyRepository<Seller>, IWriteOnlyRepository<Seller>,
+    IDeleteOnlyRepository
 {
     public async Task<IList<Seller>> FindAllAsync()
         => await _context.Sellers.ToListAsync();
@@ -14,6 +15,9 @@ public class SellerRepository
     public async Task<Seller?> FindByIdAsync(int? id)
         => await _context.Sellers.Include(s => s.Department)
             .FirstOrDefaultAsync(s => s.ID == id);
+    
+    public async Task<IList<Department>> FindDepartments()
+        => await _service.FindAllAsync();
 
     public async Task InsertAsync(Seller entity)
         => await _context.AddAsync(entity);
@@ -40,5 +44,4 @@ public class SellerRepository
             throw new IntegrityException("Can't delete seller because he/she has sales");
         _context.Sellers.Remove(entity);
     }
-
 }
