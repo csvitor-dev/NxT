@@ -1,19 +1,18 @@
 ﻿using System.Diagnostics;
 using NxT.Core.Models;
 using NxT.Core.ViewModels;
-using NxT.Mvc.Services;
-using NxT.Mvc.Services.Exceptions;
+using NxT.Exception.Internal;
+using NxT.Infrastructure.Data.Repositories;
+using NxT.Infrastructure.Data.Services;
 
 namespace NxT.Mvc.Controllers;
 
-public class DepartmentsController(DepartmentService departmentService) : Controller
+public class DepartmentsController(DepartmentRepository _service, CommitPersistence _commit) : Controller
 {
-    private readonly DepartmentService _departmentService = departmentService;
-
     // GET: Departments
     public async Task<IActionResult> Index()
     {
-        return View(await _departmentService.FindAllAsync());
+        return View(await _service.FindAllAsync());
     }
 
     // GET: Departments/Create
@@ -32,18 +31,20 @@ public class DepartmentsController(DepartmentService departmentService) : Contro
         if (ModelState.IsValid == false)
             return View(department);
 
-        await _departmentService.InsertAsync(department);
+        await _service.InsertAsync(department);
+        await _commit.CommitAsync();
+
         return RedirectToAction(nameof(Index));
     }
 
     // GET: Departments/Delete/{id?}
     public async Task<IActionResult> Delete(int? id)
     {
-        if (id == null) 
+        if (id is null) 
             return RedirectToAction(nameof(Error), new { Message = "ID not provided" });
-        var department = await _departmentService.FindByIDAsync(id);
+        var department = await _service.FindByIdAsync(id);
 
-        if (department == null) 
+        if (department is null) 
             return RedirectToAction(nameof(Error), new { Message = "ID not found" });
 
         return View(department);
@@ -55,7 +56,8 @@ public class DepartmentsController(DepartmentService departmentService) : Contro
     {
         try
         {
-            await _departmentService.RemoveAsync(id);
+            await _service.RemoveAsync(id);
+            await _commit.CommitAsync();
             return RedirectToAction(nameof(Index));
         }
         catch (IntegrityException ex)
@@ -71,11 +73,11 @@ public class DepartmentsController(DepartmentService departmentService) : Contro
     // GET: Departments/Details/{id?}
     public async Task<IActionResult> Details(int? id)
     {
-        if (id == null) 
+        if (id is null) 
             return RedirectToAction(nameof(Error), new { Message = "ID not provided" });
-        var department = await _departmentService.FindByIDAsync(id.Value);
+        var department = await _service.FindByIdAsync(id.Value);
 
-        if (department == null)
+        if (department is null)
             return RedirectToAction(nameof(Error), new { Message = "ID not found" });
 
         return View(department);
@@ -84,10 +86,10 @@ public class DepartmentsController(DepartmentService departmentService) : Contro
     // GET: Departments/Edit/{id?}
     public async Task<IActionResult> Edit(int? id)
     {
-        if (id == null) return RedirectToAction(nameof(Error), new { Message = "ID not provided" });
-        var department = await _departmentService.FindByIDAsync(id.Value);
+        if (id is null) return RedirectToAction(nameof(Error), new { Message = "ID not provided" });
+        var department = await _service.FindByIdAsync(id.Value);
 
-        if (department == null) 
+        if (department is null) 
             return RedirectToAction(nameof(Error), new { Message = "ID not found" });
         
         return View(department);
@@ -98,7 +100,7 @@ public class DepartmentsController(DepartmentService departmentService) : Contro
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, Department department)
     {
-        if (ModelState.IsValid == false)
+        if (ModelState.IsValid is false)
             return View(department);
 
         if (id != department.ID)
@@ -106,7 +108,8 @@ public class DepartmentsController(DepartmentService departmentService) : Contro
         
         try
         {
-            await _departmentService.UpdateAsync(department);
+            await _service.UpdateAsync(department);
+            await _commit.CommitAsync();
             return RedirectToAction(nameof(Index));
         }
         catch (ApplicationException ex)

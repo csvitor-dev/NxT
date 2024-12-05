@@ -1,29 +1,26 @@
 ﻿using System.Diagnostics;
 using NxT.Core.Models;
 using NxT.Core.ViewModels;
-using NxT.Mvc.Services;
-using NxT.Mvc.Services.Exceptions;
+using NxT.Exception.Internal;
+using NxT.Infrastructure.Data.Repositories;
+using NxT.Infrastructure.Data.Services;
 
 namespace NxT.Mvc.Controllers;
 
-public class SellersController(SellerService sellerService, DepartmentService departmentService) : Controller
+public class SellersController
+    (SellerRepository _service, CommitPersistence _commit) : Controller
 {
-    private readonly SellerService _sellerService = sellerService;
-    private readonly DepartmentService _departmentService = departmentService;
-
     // GET: Sellers
-    public async Task<IActionResult> Index()
-    {
-        return View(await _sellerService.FindAllAsync());
-    }
+    public async Task<IActionResult> Index() 
+        => View(await _service.FindAllAsync());
 
     // GET: Sellers/Create
     public async Task<IActionResult> Create()
     {
-        var departments = await _departmentService.FindAllAsync();
-        var sellerViewModel = new SellerForm(departments);
+        var departments = await _service.FindDepartments();
+        var model = new SellerForm(departments);
 
-        return View(sellerViewModel);
+        return View(model);
     }
     // POST: Sellers/Create
     // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -32,9 +29,9 @@ public class SellersController(SellerService sellerService, DepartmentService de
     [ValidateAntiForgeryToken] // CSRF
     public async Task<IActionResult> Create(Seller seller)
     {
-        if (ModelState.IsValid == false)
+        if (ModelState.IsValid is false)
         {
-            var departments = await _departmentService.FindAllAsync();
+            var departments = await _service.FindDepartments();
 
             return View(new SellerForm(departments)
             {
@@ -42,18 +39,20 @@ public class SellersController(SellerService sellerService, DepartmentService de
             });
         }
 
-        await _sellerService.InsertAsync(seller);
+        await _service.InsertAsync(seller);
+        await _commit.CommitAsync();
+
         return RedirectToAction(nameof(Index));
     }
 
     // GET: Sellers/Delete/{id?}
     public async Task<IActionResult> Delete(int? id)
     {
-        if (id == null) 
+        if (id is null) 
             return RedirectToAction(nameof(Error), new { Message = "ID not provided" });
-        var seller = await _sellerService.FindByIDAsync(id.Value);
+        var seller = await _service.FindByIdAsync(id);
 
-        if (seller == null) 
+        if (seller is null) 
             return RedirectToAction(nameof(Error), new { Message = "ID not found" });
 
         return View(seller);
@@ -65,7 +64,8 @@ public class SellersController(SellerService sellerService, DepartmentService de
     {
         try
         {
-            await _sellerService.RemoveAsync(id);
+            await _service.RemoveAsync(id);
+            await _commit.CommitAsync();
             return RedirectToAction(nameof(Index));
         }
         catch (IntegrityException ex)
@@ -81,11 +81,11 @@ public class SellersController(SellerService sellerService, DepartmentService de
     // GET: Sellers/Details/{id?}
     public async Task<IActionResult> Details(int? id)
     {
-        if (id == null) 
+        if (id is null) 
             return RedirectToAction(nameof(Error), new { Message = "ID not provided" });
-        var seller = await _sellerService.FindByIDAsync(id.Value);
+        var seller = await _service.FindByIdAsync(id.Value);
 
-        if (seller == null) return RedirectToAction(nameof(Error), new { Message = "ID not found" });
+        if (seller is null) return RedirectToAction(nameof(Error), new { Message = "ID not found" });
 
         return View(seller);
     }
@@ -95,11 +95,11 @@ public class SellersController(SellerService sellerService, DepartmentService de
     {
         if (id == null) 
             return RedirectToAction(nameof(Error), new { Message = "ID not provided" });
-        var seller = await _sellerService.FindByIDAsync(id.Value);
+        var seller = await _service.FindByIdAsync(id.Value);
 
         if (seller == null) 
             return RedirectToAction(nameof(Error), new { Message = "ID not found" });
-        var departments = await _departmentService.FindAllAsync();
+        var departments = await _service.FindDepartments();
         SellerForm model = new(departments) { Seller = seller };
 
         return View(model);
@@ -111,7 +111,7 @@ public class SellersController(SellerService sellerService, DepartmentService de
     {
         if (ModelState.IsValid == false)
         {
-            var departments = await _departmentService.FindAllAsync();
+            var departments = await _service.FindDepartments();
 
             return View(new SellerForm(departments)
             {
@@ -123,9 +123,9 @@ public class SellersController(SellerService sellerService, DepartmentService de
             return RedirectToAction(nameof(Error), new { Message = "ID mismatch" });
         try
         {
-            await _sellerService.UpdateAsync(seller);
+            await _service.UpdateAsync(seller);
+            await _commit.CommitAsync();
             return RedirectToAction(nameof(Index));
-
         }
         catch (ApplicationException ex)
         {
