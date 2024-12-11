@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NxT.Core.Models;
-using NxT.Core.Repositories;
 using NxT.Infrastructure.Data;
 using NxT.Infrastructure.Data.Repositories;
+using NxT.Infrastructure.Data.Services;
 
 namespace NxT.Infrastructure.Extensions;
 
@@ -14,6 +13,7 @@ public static class DataAccessDIExtension
     {
         AddNxtDbContext(self, configuration.ConnectionString());
         AddRepositories(self);
+        self.AddScoped<CommitPersistence>();
     }
 
     private static void AddNxtDbContext(this IServiceCollection self, string connection)
@@ -21,9 +21,8 @@ public static class DataAccessDIExtension
         MySqlServerVersion version = new(new Version(0, 2, 0));
 
         self.AddDbContext<NxtContext>((options)
-            => options.UseMySql(connection, version,
-                (opt) => opt.MigrationsAssembly("NxT.Infrastructure")
-        ));
+            => options.UseMySql(connection, version)
+        );
     }
     
     private static void AddRepositories(this IServiceCollection self)
@@ -35,15 +34,11 @@ public static class DataAccessDIExtension
 
     private static void AddSellerRepository(IServiceCollection services)
     {
-        services.AddScoped<IReadOnlyRepository<Seller>, SellerRepository>();
-        services.AddScoped<IWriteOnlyRepository<Seller>, SellerRepository>();
-        services.AddScoped<IDeleteOnlyRepository, SellerRepository>();
+        services.AddScoped<SellerRepository>();
     }
 
     private static void AddDepartmentRepository(IServiceCollection services)
     {
-        services.AddScoped<IReadOnlyRepository<Department>, DepartmentRepository>();
-        services.AddScoped<IWriteOnlyRepository<Department>, DepartmentRepository>();
-        services.AddScoped<IDeleteOnlyRepository, DepartmentRepository>();
+        services.AddScoped<DepartmentRepository>();
     }
 }
