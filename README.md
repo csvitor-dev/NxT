@@ -1,5 +1,5 @@
 <p>
-    <img src="./docs/NxT.png" alt="NxT official brand" width="60" />
+    <img src="./assets/NxT.png" alt="NxT official brand" width="60" />
 </p>
 
 # _NxT_: Open Sales Manager
@@ -21,5 +21,5 @@
 
 <br />
 <p align="center">
-    <img src="./docs/NextTrend.png" alt="NxT official brand" width="45" />
+    <img src="./assets/NextTrend.png" alt="NxT official brand" width="45" />
 </p>
