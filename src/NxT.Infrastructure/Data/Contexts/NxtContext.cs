@@ -1,7 +1,7 @@
 using NxT.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace NxT.Infrastructure.Data;
+namespace NxT.Infrastructure.Data.Contexts;
 
 public class NxtContext
     (DbContextOptions<NxtContext> options) : DbContext(options)
