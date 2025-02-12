@@ -1,5 +1,6 @@
 using NxT.Core.Repositories;
 using NxT.Exception.Internal;
+using NxT.Infrastructure.Data.Contexts;
 
 namespace NxT.Infrastructure.Data.Services;
 

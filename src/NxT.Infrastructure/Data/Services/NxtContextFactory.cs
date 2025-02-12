@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using NxT.Infrastructure.Data.Contexts;
 
 namespace NxT.Infrastructure.Data.Services;
 

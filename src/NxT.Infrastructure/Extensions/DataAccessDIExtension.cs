@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NxT.Infrastructure.Data;
+using NxT.Infrastructure.Data.Contexts;
 using NxT.Infrastructure.Data.Repositories;
 using NxT.Infrastructure.Data.Services;
 

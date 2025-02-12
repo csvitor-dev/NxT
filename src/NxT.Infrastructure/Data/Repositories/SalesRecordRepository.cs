@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NxT.Core.Models;
+using NxT.Infrastructure.Data.Contexts;
 
 namespace NxT.Infrastructure.Data.Repositories;
 
