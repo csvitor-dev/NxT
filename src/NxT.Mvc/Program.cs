@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
+await builder.Services.ApplyMigrations();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -41,5 +43,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
+
+
 
 app.Run();
