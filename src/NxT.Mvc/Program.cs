@@ -1,10 +1,11 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using NxT.Infrastructure.Extensions;
+using NxT.Infrastructure.Providers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration, new MySqlProvider());
 
 await builder.Services.ApplyMigrations();
 
