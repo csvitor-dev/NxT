@@ -1,27 +1,25 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NxT.Infrastructure.Data.Contexts;
 using NxT.Infrastructure.Data.Repositories;
 using NxT.Infrastructure.Data.Services;
+using NxT.Infrastructure.Providers;
 
 namespace NxT.Infrastructure.Extensions;
 
 public static class DataAccessDIExtension
 {
-    public static void AddInfrastructure(this IServiceCollection self, IConfiguration configuration)
+    public static void AddInfrastructure(this IServiceCollection self, IConfiguration configuration, IDbProvider provider)
     {
-        AddNxtDbContext(self, configuration.ConnectionString());
+        AddNxtDbContext(self, configuration, provider);
         AddRepositories(self);
         self.AddScoped<CommitPersistence>();
     }
 
-    private static void AddNxtDbContext(this IServiceCollection self, string connection)
+    private static void AddNxtDbContext(this IServiceCollection self, IConfiguration configuration, IDbProvider provider)
     {
-        MySqlServerVersion version = new(new Version(0, 2, 0));
-
         self.AddDbContext<NxtContext>((options)
-            => options.UseMySql(connection, version)
+            => provider.Configure(options, configuration)
         );
     }
     
