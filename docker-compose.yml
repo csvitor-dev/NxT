@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:9.2
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: salesdb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: mVC#1246
+    ports:
+      - "3306:3306"
+    networks:
+      - db_network
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    environment:
+      POSTGRES_PASSWORD: mVC#1246
+      POSTGRES_DB: salesdb
+      POSTGRES_USER: admin
+    ports:
+      - "5432:5432"
+    networks:
+      - db_network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+networks:
+  db_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  postgres_data:
