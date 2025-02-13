@@ -8,8 +8,8 @@ namespace NxT.Infrastructure.Extensions;
 
 public static class InfrastructureConfigExtension
 {
-    public static string ConnectionString(this IConfiguration self)
-        => self.GetConnectionString("db")!;
+    public static string ConnectionString(this IConfiguration self, string connection)
+        => self.GetConnectionString(connection)!;
 
     public static async Task ApplyMigrations(this IServiceCollection self)
     {
