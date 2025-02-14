@@ -9,8 +9,10 @@ namespace NxT.Infrastructure.Extensions;
 
 public static class DataAccessDIExtension
 {
-    public static void AddInfrastructure(this IServiceCollection self, IConfiguration configuration, IDbProvider provider)
+    public static void AddInfrastructure(this IServiceCollection self, IConfiguration configuration, string providerName)
     {
+        var provider = InfraConfiguration.GetDbProvider(providerName);
+        
         AddNxtDbContext(self, configuration, provider);
         AddRepositories(self);
         self.AddScoped<CommitPersistence>();
