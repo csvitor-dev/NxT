@@ -70,7 +70,7 @@ artifacts/
 ScaffoldingReadMe.txt
 
 # Exclude file with connection string or any sensitive data
-appsettings.json
+# appsettings.json
 
 # StyleCop
 StyleCopReport.xml
