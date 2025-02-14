@@ -1,14 +1,12 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using NxT.Infrastructure.Data.Migrations;
 using NxT.Infrastructure.Extensions;
-using NxT.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var providerName = args.Length > 0 ? args[0] : "";
+var providerName = args.Length > 0 ? args[0] : string.Empty;
 builder.Services.AddInfrastructure(builder.Configuration, providerName);
-
-await builder.Services.ApplyMigrations();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -46,6 +44,13 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 
-
+ApplyMigrations(builder.Configuration);
 
 app.Run();
+
+void ApplyMigrations(IConfiguration configuration)
+{
+    var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+    
+    Migrator.Migrate(scope.ServiceProvider, configuration, providerName);
+}
