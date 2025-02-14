@@ -1,7 +1,6 @@
 using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NxT.Infrastructure.Data.Migrations.DbCreator;
 
 namespace NxT.Infrastructure.Data.Migrations;
 

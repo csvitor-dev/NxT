@@ -1,4 +1,5 @@
 using FluentMigrator;
+using FluentMigrator.Builders.IfDatabase;
 
 namespace NxT.Infrastructure.Data.Migrations.Versions;
 
@@ -16,7 +17,7 @@ public sealed class Startup_0000 : Migration
             .WithColumn("Name").AsString(100).NotNullable()
             .WithColumn("Email").AsString(100).NotNullable()
             .WithColumn("BirthDate").AsDateTime().NotNullable()
-            .WithColumn("BaseSalary").AsDecimal().NotNullable()
+            .WithColumn("BaseSalary").AsDecimal(18, 2).NotNullable()
             .WithColumn("DepartmentID").AsInt32().NotNullable();
 
         Create.ForeignKey("FK_Seller_Department")
@@ -27,7 +28,7 @@ public sealed class Startup_0000 : Migration
         Create.Table("SalesRecords")
             .WithColumn("ID").AsInt32().PrimaryKey().Identity()
             .WithColumn("Date").AsDateTime().NotNullable()
-            .WithColumn("Amount").AsDecimal().NotNullable()
+            .WithColumn("Amount").AsDecimal(18, 2).NotNullable()
             .WithColumn("Status").AsInt32().NotNullable()
             .WithColumn("SellerID").AsInt32().NotNullable();
 

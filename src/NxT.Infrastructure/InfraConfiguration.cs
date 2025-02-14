@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using NxT.Infrastructure.Data.Migrations.DbCreator;
+using NxT.Infrastructure.Data.Providers;
 using NxT.Infrastructure.Extensions;
-using NxT.Infrastructure.Providers;
 
 namespace NxT.Infrastructure;
 
@@ -12,6 +12,7 @@ internal static class InfraConfiguration
     {
         "mysql" => new MySqlProvider(configuration.ConnectionString("mysql")),
         "psql" => new PostgreSqlProvider(configuration.ConnectionString("psql")),
+        "mssql" => new SqlServerProvider(configuration.ConnectionString("mssql")),
         _ => new MySqlProvider(configuration.ConnectionString("mysql")),
     };
 
@@ -20,6 +21,7 @@ internal static class InfraConfiguration
     {
         "mysql" => new MysqlDbCreator(configuration.ConnectionString("mysql")),
         "psql" => new PostgreSqlDbCreator(configuration.ConnectionString("psql")),
+        "mssql" => new SqlServerDbCreator(configuration.ConnectionString("mssql")),
         _ => new MysqlDbCreator(configuration.ConnectionString("mysql")),
     };
 }
