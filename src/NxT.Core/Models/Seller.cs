@@ -24,14 +24,14 @@ public class Seller
     [Range(100.0, 20000.0, ErrorMessage = "{0} must be from {1} to {2}")]
     [Display(Name = "Base Salary")]
     [DisplayFormat(DataFormatString = "{0:C2}")]
-    public double BaseSalary { get; set; }
+    public decimal BaseSalary { get; set; }
 
     public int DepartmentID { get; set; }
     public Department? Department { get; set; }
     public ICollection<SalesRecord> Sales { get; } = null!;
 
     public Seller() => Sales = [];
-    public Seller(int id, string? name, string? email, DateTime birthDate, double baseSalary, Department department) : this()
+    public Seller(int id, string? name, string? email, DateTime birthDate, decimal baseSalary, Department department) : this()
     {
         ID = id;
         Name = name;
@@ -48,7 +48,7 @@ public class Seller
     public void RemoveSales(SalesRecord record) 
         => Sales.Remove(record);
 
-    public double TotalSales(DateTime initial, DateTime final)
+    public decimal TotalSales(DateTime initial, DateTime final)
         => (from record in Sales 
             where record.Date >= initial && record.Date <= final
             select record.Amount).Sum();

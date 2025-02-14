@@ -21,6 +21,6 @@ public class Department
     public void AddSeller(Seller seller) 
         => Sellers.Add(seller);
     
-    public double TotalSales(DateTime initial, DateTime final)
+    public decimal TotalSales(DateTime initial, DateTime final)
         => (from seller in Sellers select seller.TotalSales(initial, final)).Sum();
 }
