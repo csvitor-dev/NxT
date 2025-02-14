@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="FluentMigrator" Version="6.2.0" />
     <PackageReference Include="FluentMigrator.Runner" Version="6.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />

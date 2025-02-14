@@ -1,22 +1,24 @@
+using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using NxT.Infrastructure.Extensions;
-
 
 namespace NxT.Infrastructure.Providers;
 
-public class PostgreSqlProvider : IDbProvider
+public class PostgreSqlProvider(string connectionString) : IDbProvider
 {
-    public void Configure(DbContextOptionsBuilder options, IConfiguration configuration)
+    public void Configure(DbContextOptionsBuilder options)
     {
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-
-        var connectionString = configuration.ConnectionString("psql");
 
         options.UseNpgsql(connectionString, opt => 
         {
             opt.EnableRetryOnFailure();
             opt.MigrationsAssembly("NxT.Infrastructure");
         });
+    }
+
+    public IMigrationRunnerBuilder Migrate(IMigrationRunnerBuilder builder)
+    {
+
+        return builder.AddPostgres15_0().WithGlobalConnectionString(connectionString);
     }
 }

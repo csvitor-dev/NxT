@@ -1,15 +1,12 @@
+using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using NxT.Infrastructure.Data.Contexts;
-using NxT.Infrastructure.Extensions;
 
 namespace NxT.Infrastructure.Providers;
 
-public class MySqlProvider : IDbProvider
+public class MySqlProvider(string connectionString) : IDbProvider
 {
-    public void Configure(DbContextOptionsBuilder options, IConfiguration configuration)
+    public void Configure(DbContextOptionsBuilder options)
     {
-        var connectionString = configuration.ConnectionString("mysql");
         MySqlServerVersion version = new(new Version(0, 2, 0));
 
         options.UseMySql(connectionString, version, opt => 
@@ -17,5 +14,11 @@ public class MySqlProvider : IDbProvider
             opt.EnableRetryOnFailure();
             opt.MigrationsAssembly("NxT.Infrastructure");
         });
+    }
+
+    public IMigrationRunnerBuilder Migrate(IMigrationRunnerBuilder builder)
+    {
+
+        return builder.AddMySql8().WithGlobalConnectionString(connectionString);
     }
 }
