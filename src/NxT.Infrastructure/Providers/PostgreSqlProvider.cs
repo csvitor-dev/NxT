@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using NxT.Infrastructure.Extensions;
 
@@ -10,8 +9,14 @@ public class PostgreSqlProvider : IDbProvider
 {
     public void Configure(DbContextOptionsBuilder options, IConfiguration configuration)
     {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
         var connectionString = configuration.ConnectionString("psql");
 
-        options.UseNpgsql(connectionString);
+        options.UseNpgsql(connectionString, opt => 
+        {
+            opt.EnableRetryOnFailure();
+            opt.MigrationsAssembly("NxT.Infrastructure");
+        });
     }
 }

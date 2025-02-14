@@ -12,6 +12,10 @@ public class MySqlProvider : IDbProvider
         var connectionString = configuration.ConnectionString("mysql");
         MySqlServerVersion version = new(new Version(0, 2, 0));
 
-        options.UseMySql(connectionString, version);
+        options.UseMySql(connectionString, version, opt => 
+        {
+            opt.EnableRetryOnFailure();
+            opt.MigrationsAssembly("NxT.Infrastructure");
+        });
     }
 }
