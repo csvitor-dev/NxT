@@ -3,12 +3,12 @@ services:
     image: mysql:8-oracle
     container_name: mysql_db
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: salesdb
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: mVC#1246
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=salesdb
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=mVC#1246
     ports:
-      - "3306:3306"
+      - 3306:3306
     networks:
       - db_network
     volumes:
@@ -18,15 +18,31 @@ services:
     image: postgres:15-alpine
     container_name: postgres_db
     environment:
-      POSTGRES_PASSWORD: mVC#1246
-      POSTGRES_DB: salesdb
-      POSTGRES_USER: admin
+      - POSTGRES_PASSWORD=mVC#1246
+      - POSTGRES_DB=salesdb
+      - POSTGRES_USER=admin
     ports:
-      - "5432:5432"
+      - 5432:5432
     networks:
       - db_network
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_db
+    environment:
+      - SA_PASSWORD=mVC12467
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Developer
+      - MSSQL_DATABASE=salesdb
+    ports:
+      - 1433:1433
+    networks:
+      - db_network
+    volumes:
+      - mssql_data:/var/opt/mssql
+    restart: unless-stopped
 
 networks:
   db_network:
@@ -35,3 +51,4 @@ networks:
 volumes:
   mysql_data:
   postgres_data:
+  mssql_data:

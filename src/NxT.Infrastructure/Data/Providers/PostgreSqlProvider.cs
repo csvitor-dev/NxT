@@ -1,7 +1,7 @@
 using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
 
-namespace NxT.Infrastructure.Providers;
+namespace NxT.Infrastructure.Data.Providers;
 
 public class PostgreSqlProvider(string connectionString) : IDbProvider
 {
@@ -16,9 +16,6 @@ public class PostgreSqlProvider(string connectionString) : IDbProvider
         });
     }
 
-    public IMigrationRunnerBuilder Migrate(IMigrationRunnerBuilder builder)
-    {
-
-        return builder.AddPostgres15_0().WithGlobalConnectionString(connectionString);
-    }
+    public IMigrationRunnerBuilder Migrate(IMigrationRunnerBuilder builder) 
+        => builder.AddPostgres15_0().WithGlobalConnectionString(connectionString);
 }

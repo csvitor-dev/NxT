@@ -1,7 +1,7 @@
 using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
 
-namespace NxT.Infrastructure.Providers;
+namespace NxT.Infrastructure.Data.Providers;
 
 public interface IDbProvider
 {

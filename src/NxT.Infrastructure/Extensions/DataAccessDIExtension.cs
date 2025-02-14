@@ -3,9 +3,9 @@ using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NxT.Infrastructure.Data.Contexts;
+using NxT.Infrastructure.Data.Providers;
 using NxT.Infrastructure.Data.Repositories;
 using NxT.Infrastructure.Data.Services;
-using NxT.Infrastructure.Providers;
 
 namespace NxT.Infrastructure.Extensions;
 
