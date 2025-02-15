@@ -1,5 +1,4 @@
 using FluentMigrator;
-using FluentMigrator.Builders.IfDatabase;
 
 namespace NxT.Infrastructure.Data.Migrations.Versions;
 
