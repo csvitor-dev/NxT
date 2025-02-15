@@ -17,6 +17,45 @@
 > The old project, called '**SalesWebMVC**' has been completely revamped, you can find the old `README.md` in
 > [`docs/older/README.md`](./docs/older/README.md).
 
+## How to run?
+
+> As a first requirement to run the application, **you need to have [`docker`](https://docs.docker.com/get-started/) installed on your machine**.
+
+First, make sure the **_Docker Compose_** services are running, using:
+
+```bash
+docker compose ps
+```
+
+If not:
+
+```bash
+# daemon mode (in backgroud)
+docker compose up -d
+```
+
+Then, just run the **_ASP.NET MVC_** application!
+
+```bash
+# assuming it is at the root of the project, use the `--project` flag
+dotnet run --project ./src/NxT.Mvc/ -lp https
+```
+
+> [!WARNING]\
+> When you run the application as above, it will use the **_MySQL_** database provider by default.
+> The application provides two other providers: **_PostgreSQL_** and **_SQL Server_**.
+>
+> To run any other provider, simply provide a new argument via the **.NET CLI**:
+> ```bash
+> # to run PostgreSQL
+> dotnet run --project ./src/NxT.Mvc/ -lp https psql
+>
+> # or, to run SQL Server
+> dotnet run --project ./src/NxT.Mvc/ -lp https mssql
+> ```
+>
+> Any argument supplied that is not a valid provider `["mysql", "psql", "mssql"]` will default to **_MySQL_**.
+
 ---
 
 <br />
