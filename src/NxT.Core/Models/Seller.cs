@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using NxT.Core.Contracts;
 
 namespace NxT.Core.Models;
 public class Seller
@@ -26,6 +27,8 @@ public class Seller
     [DisplayFormat(DataFormatString = "{0:C2}")]
     public decimal BaseSalary { get; set; }
 
+    public ICommissionStrategy Commission { get; set; } = new NoCommissionStrategy();
+
     public int DepartmentID { get; set; }
     public Department? Department { get; set; }
     public ICollection<SalesRecord> Sales { get; } = null!;
@@ -52,4 +55,7 @@ public class Seller
         => (from record in Sales 
             where record.Date >= initial && record.Date <= final
             select record.Amount).Sum();
+
+    public decimal CalculateSalary()
+        => Commission.Calculate(this);
 }
