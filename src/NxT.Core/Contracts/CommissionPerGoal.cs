@@ -4,13 +4,15 @@ namespace NxT.Core.Contracts;
 
 public class CommissionPerGoal : Commission
 {
+    public decimal BaseRate { get; set; }
     public decimal Goal { get; set;}
     public decimal ExtraRate { get; set; }
 
     public CommissionPerGoal() { }
     public CommissionPerGoal(int id, decimal goal, decimal baseRate, decimal extraRate)
-        : base(id, baseRate)
+        : base(id)
     {
+        BaseRate = baseRate;
         Goal = goal;
         ExtraRate = extraRate;
     }

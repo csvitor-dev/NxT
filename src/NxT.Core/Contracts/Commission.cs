@@ -5,15 +5,11 @@ namespace NxT.Core.Contracts;
 public abstract class Commission
 {
     public int ID { get; set; }
-    public decimal BaseRate { get; set; }
 
     public Commission() { }
 
-    public Commission(int id, decimal baseRate)
-    {
-        ID = id;
-        BaseRate = baseRate;
-    }
+    public Commission(int id)
+     => ID = id;
 
     protected abstract decimal CalculateCommission(decimal sales);
     

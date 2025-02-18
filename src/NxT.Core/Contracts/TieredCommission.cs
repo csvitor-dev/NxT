@@ -6,7 +6,7 @@ public class TieredCommission : Commission
 
     public TieredCommission()
         => Ranges = [];
-    public TieredCommission(int id, IEnumerable<TierRange> ranges) : base(id, 0.0m)
+    public TieredCommission(int id, IEnumerable<TierRange> ranges) : base(id)
         => Ranges = ranges;
 
     protected sealed override decimal CalculateCommission(decimal sales)
