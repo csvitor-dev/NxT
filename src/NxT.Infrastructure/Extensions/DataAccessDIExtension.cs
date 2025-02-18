@@ -48,6 +48,6 @@ public static class DataAccessDIExtension
             provider.Migrate(builder)
                 .ScanIn(Assembly.Load("NxT.Infrastructure"))
                 .For.All();
-        });
+        }).AddLogging(config => config.AddFluentMigratorConsole());
     }
 }
