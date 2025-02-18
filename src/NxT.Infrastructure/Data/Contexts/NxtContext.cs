@@ -1,6 +1,7 @@
 using NxT.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using NxT.Core.Contracts;
+using NxT.Infrastructure.Data.Contexts.Interceptors;
 
 namespace NxT.Infrastructure.Data.Contexts;
 
@@ -17,5 +18,17 @@ public class NxtContext
     public DbSet<TierRange> Range { get; init; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-        => modelBuilder.ApplyConfigurationsFromAssembly(typeof(NxtContext).Assembly);
+    {
+        modelBuilder.Entity<Commission>().UseTptMappingStrategy();
+
+        modelBuilder.Entity<CommissionPerSale>().ToTable("CommissionPerSale");
+        modelBuilder.Entity<CommissionPerGoal>().ToTable("CommissionPerGoal");
+        modelBuilder.Entity<TieredCommission>().ToTable("TieredCommission");
+        modelBuilder.Entity<TierRange>().ToTable("Range");
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(NxtContext).Assembly);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.AddInterceptors(new CommissionInterceptor());
 }
