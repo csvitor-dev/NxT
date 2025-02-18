@@ -27,7 +27,8 @@ public class Seller
     [DisplayFormat(DataFormatString = "{0:C2}")]
     public decimal BaseSalary { get; set; }
 
-    public ICommissionStrategy Commission { get; set; } = new NoCommissionStrategy();
+    public Commission Commission { get; set; } = new NoCommission();
+    public int? CommissionID { get; set; }
 
     public int DepartmentID { get; set; }
     public Department? Department { get; set; }
@@ -56,6 +57,6 @@ public class Seller
             where record.Date >= initial && record.Date <= final
             select record.Amount).Sum();
 
-    public decimal CalculateSalary()
+    public decimal CalculateCommission()
         => Commission.Calculate(this);
 }
