@@ -47,7 +47,7 @@ public sealed class CommissionsTable_0002 : Migration
             .ToTable("TieredCommission").PrimaryColumn("ID");
 
         Alter.Table("Sellers")
-            .AddColumn("CommissionID").AsInt32().NotNullable();
+            .AddColumn("CommissionID").AsInt32().Nullable();
 
         Create.ForeignKey("FK_Sellers_Commission")
             .FromTable("Sellers").ForeignColumn("CommissionID")
