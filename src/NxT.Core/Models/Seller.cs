@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using NxT.Core.Contracts;
 
 namespace NxT.Core.Models;
@@ -26,6 +27,11 @@ public class Seller
     [Display(Name = "Base Salary")]
     [DisplayFormat(DataFormatString = "{0:C2}")]
     public decimal BaseSalary { get; set; }
+
+    [NotMapped]
+    [Display(Name = "Total Commission")]
+    [DisplayFormat(DataFormatString = "{0:C2}")]
+    public decimal TotalCommission { get; set; }
 
     public Commission Commission { get; set; } = new NoCommission();
     public int? CommissionID { get; set; }
