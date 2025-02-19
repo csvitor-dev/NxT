@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using NxT.Core.Contracts;
 using NxT.Core.Models;
 using NxT.Core.Repositories;
 using NxT.Exception.Internal;
@@ -11,7 +12,15 @@ public class SellerRepository
     IDeleteOnlyRepository
 {
     public async Task<IList<Seller>> FindAllAsync()
-        => await _context.Sellers.ToListAsync();
+    {
+        var result = await _context.Sellers
+            .Include(seller => seller.Sales)
+            .Include(seller => seller.Commission)
+            .ToListAsync();
+        result.ForEach(seller => seller.TotalCommission = seller.CalculateCommission());
+
+        return result;
+    }
 
     public async Task<Seller?> FindByIdAsync(int? id)
         => await _context.Sellers.Include(s => s.Department)
