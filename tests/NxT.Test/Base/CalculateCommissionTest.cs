@@ -19,14 +19,24 @@ public class CalculateCommissionTest
             BirthDate = new DateTime(1995, 12, 15),
             BaseSalary = 3500.0m,
         };
+        var record = new SalesRecord
+        {
+            ID = 1,
+            Amount = 250.0m,
+            Date = DateTime.Now,
+            Seller = seller,
+            Status = ESaleStatus.Billed,
+        };
+
 
         // Act
+        seller.AddSales(record);
         var total = seller.CalculateCommission();
 
         // Assert
         Assert.Multiple(() =>
         {
-            Assert.That(seller.Sales, Is.Empty);
+            Assert.That(seller.Sales, Is.Not.Empty);
             Assert.That(total, Is.EqualTo(0.0m));
         });
     }
